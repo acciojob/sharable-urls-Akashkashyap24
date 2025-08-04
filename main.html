@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <html>
   <body>
+	   <form id="myForm" onsubmit="handleSubmit(event)">
+    <label>Name: <input type="text" id="name" name="name"></label><br><br>
+    <label>Year: <input type="number" id="year" name="year"></label><br><br>
+    <button type="submit" id="button">Submit</button>
+  </form>
+
+  <h3 id="url">https://localhost:8080/</h3>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault(); // prevent page reload
+      
+      const baseUrl = 'https://localhost:8080/';
+      const name = document.getElementById('name').value.trim();
+      const year = document.getElementById('year').value.trim();
+      const urlDisplay = document.getElementById('url');
+
+      const params = new URLSearchParams();
+
+      if (name) {
+        params.append('name', name);
+      }
+
+      if (year) {
+        params.append('year', year);
+      }
+
+      // Construct full URL
+      const finalUrl = params.toString() ? `${baseUrl}?${params.toString()}` : baseUrl;
+
+      urlDisplay.textContent = finalUrl;
+    }
     <script type="text/javascript" src="./script.js">
 </script>
   </body>
